@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestingApplication.Views.EditRegistrationPage"
-             Title="EditRegistrationPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="VolunteerConnect2.Views.EditRegistrationPage"
+    Title="Edit Registration">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label x:Name="OpportunityTitleLabel"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Entry x:Name="NameEntry"
+                   Placeholder="Preferred Name"
+                   FontSize="18" />
+
+            <Entry x:Name="ContactEntry"
+                   Placeholder="Email or Phone Number"
+                   FontSize="18"
+                   Keyboard="Email" />
+
+            <Entry x:Name="AvailabilityEntry"
+                   Placeholder="Your Availability"
+                   FontSize="18" />
+
+            <Editor x:Name="NotesEditor"
+                    Placeholder="Optional Notes"
+                    FontSize="16"
+                    HeightRequest="120" />
+
+            <CheckBox x:Name="ConsentCheckBox" />
+            <Label Text="I agree to the privacy terms and consent to storing my information."
+                   FontSize="14"
+                   VerticalOptions="Center" />
+
+            <Button Text="Save Changes"
+                    x:Name="SaveButton"
+                    BackgroundColor="#0078D4"
+                    TextColor="White"
+                    FontSize="18"
+                    CornerRadius="10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
