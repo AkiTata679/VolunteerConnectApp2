@@ -1,12 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestingApplication.Views.OpportunitiesPage"
-             Title="OpportunitiesPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="VolunteerConnect2.Views.OpportunitiesPage"
+    Title="Opportunities">
+
+    <VerticalStackLayout Padding="15" Spacing="15">
+
+        <!-- Search -->
+        <SearchBar x:Name="SearchBar"
+                   Placeholder="Search by title..."
+                   FontSize="16" />
+
+        <!-- Category Filter -->
+        <Picker x:Name="CategoryPicker"
+                Title="Filter by category"
+                FontSize="16" />
+
+        <!-- Availability Filter -->
+        <HorizontalStackLayout Spacing="10">
+            <Label Text="Available Only" VerticalOptions="Center" />
+            <Switch x:Name="AvailabilitySwitch" />
+        </HorizontalStackLayout>
+
+        <!-- Opportunities List -->
+        <CollectionView x:Name="OpportunitiesList"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
+                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto">
+
+                            <Image Grid.RowSpan="3"
+                                   Grid.Column="0"
+                                   Source="{Binding ImageName}"
+                                   HeightRequest="100"
+                                   Aspect="AspectFill"
+                                   StrokeShape="RoundRectangle 10" />
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Category}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>
