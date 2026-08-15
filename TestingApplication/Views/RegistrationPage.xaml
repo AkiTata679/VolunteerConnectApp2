@@ -8,42 +8,46 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
+            <!-- Opportunity Title -->
             <Label x:Name="OpportunityTitleLabel"
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <Entry x:Name="NameEntry"
-                   Placeholder="Preferred Name"
-                   FontSize="18" />
+            <!-- Preferred Name -->
+            <Label Text="Preferred Name" FontSize="18" />
+            <Entry x:Name="PreferredNameEntry"
+                   Placeholder="Enter your preferred name" />
 
+            <!-- Contact Detail -->
+            <Label Text="Email Address or Phone Number" FontSize="18" />
             <Entry x:Name="ContactEntry"
-                   Placeholder="Email or Phone Number"
-                   FontSize="18"
-                   Keyboard="Email" />
+                   Placeholder="Enter email or phone number" />
 
+            <!-- Availability -->
+            <Label Text="Availability" FontSize="18" />
             <Entry x:Name="AvailabilityEntry"
-                   Placeholder="Your Availability"
-                   FontSize="18" />
+                   Placeholder="When are you available?" />
 
+            <!-- Optional Note -->
+            <Label Text="Optional Note" FontSize="18" />
             <Editor x:Name="NotesEditor"
-                    Placeholder="Optional Notes"
-                    FontSize="16"
-                    HeightRequest="120" />
+                    Placeholder="Add a note (optional)"
+                    AutoSize="TextChanges" />
 
+            <!-- Privacy Consent -->
             <HorizontalStackLayout Spacing="10">
-                <CheckBox x:Name="ConsentCheckBox" />
-                <Label Text="I agree to the privacy terms and consent to storing my information."
-                       FontSize="14"
+                <CheckBox x:Name="PrivacyConsentCheckBox" />
+                <Label Text="I consent to my information being stored for volunteer registration purposes."
                        VerticalOptions="Center" />
             </HorizontalStackLayout>
 
+            <!-- Submit Button -->
             <Button Text="Submit Registration"
-                    x:Name="SubmitButton"
                     BackgroundColor="#0078D4"
                     TextColor="White"
-                    FontSize="18"
-                    CornerRadius="10" />
+                    CornerRadius="10"
+                    Clicked="SubmitClicked" />
 
         </VerticalStackLayout>
     </ScrollView>

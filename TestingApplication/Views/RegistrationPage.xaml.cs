@@ -9,6 +9,8 @@ namespace VolunteerConnect2.Views
         private OpportunityService _opportunityService = new OpportunityService();
         private RegistrationService _registrationService = new RegistrationService();
 
+        private VolunteerOpportunity _opportunity;
+
         public int OpportunityId { get; set; }
 
         public RegistrationPage()
@@ -24,61 +26,77 @@ namespace VolunteerConnect2.Views
                 await DatabaseService.InitializeAsync();
 
             await LoadOpportunity();
-            SetupSubmitButton();
         }
 
         private async Task LoadOpportunity()
         {
-            var opportunity = await _opportunityService.GetByIdAsync(OpportunityId);
+            _opportunity = await _opportunityService.GetByIdAsync(OpportunityId);
 
-            if (opportunity == null)
+            if (_opportunity == null)
             {
-                await DisplayAlert("Error", "The selected opportunity could not be found.", "OK");
+                await DisplayAlert("Error", "Opportunity not found.", "OK");
                 await Shell.Current.GoToAsync("..");
                 return;
             }
 
-            OpportunityTitleLabel.Text = opportunity.Title;
+            OpportunityTitleLabel.Text = _opportunity.Title;
         }
 
-        private void SetupSubmitButton()
+        private async void SubmitClicked(object sender, EventArgs e)
         {
-            SubmitButton.Clicked += async (s, e) =>
+            string preferredName = PreferredNameEntry.Text?.Trim();
+            string contact = ContactEntry.Text?.Trim();
+            string availability = AvailabilityEntry.Text?.Trim();
+            string notes = NotesEditor.Text?.Trim();
+
+            // Required fields
+            if (string.IsNullOrWhiteSpace(preferredName) ||
+                string.IsNullOrWhiteSpace(contact) ||
+                string.IsNullOrWhiteSpace(availability))
             {
-                if (string.IsNullOrWhiteSpace(NameEntry.Text))
-                {
-                    await DisplayAlert("Missing Information", "Please enter your preferred name.", "OK");
-                    return;
-                }
+                await DisplayAlert("Missing Information",
+                    "Please fill in all required fields (name, contact, availability).",
+                    "OK");
+                return;
+            }
 
-                if (string.IsNullOrWhiteSpace(ContactEntry.Text))
-                {
-                    await DisplayAlert("Missing Information", "Please enter your contact details.", "OK");
-                    return;
-                }
+            // Contact validation
+            bool validEmail = contact.Contains("@") && contact.Contains(".");
+            bool validPhone = contact.All(char.IsDigit) && contact.Length >= 7;
 
-                if (!ConsentCheckBox.IsChecked)
-                {
-                    await DisplayAlert("Consent Required", "You must provide privacy consent before registering.", "OK");
-                    return;
-                }
+            if (!validEmail && !validPhone)
+            {
+                await DisplayAlert("Invalid Contact",
+                    "Please enter a valid email address or phone number.",
+                    "OK");
+                return;
+            }
 
-                var registration = new VolunteerRegistration
-                {
-                    OpportunityId = OpportunityId,
-                    PreferredName = NameEntry.Text.Trim(),
-                    ContactDetail = ContactEntry.Text.Trim(),
-                    Availability = AvailabilityEntry.Text?.Trim(),
-                    Notes = NotesEditor.Text?.Trim(),
-                    ConsentGiven = true,
-                    RegistrationDate = DateTime.Now
-                };
+            // Privacy consent
+            if (!PrivacyConsentCheckBox.IsChecked)
+            {
+                await DisplayAlert("Consent Required",
+                    "You must provide privacy consent before submitting.",
+                    "OK");
+                return;
+            }
 
-                await _registrationService.AddAsync(registration);
-
-                await DisplayAlert("Success", "Your registration has been saved.", "OK");
-                await Shell.Current.GoToAsync("//MyRegistrationPage");
+            // Save registration
+            var registration = new VolunteerRegistration
+            {
+                OpportunityId = _opportunity.Id,
+                PreferredName = preferredName,
+                ContactDetail = contact,
+                Availability = availability,
+                Notes = notes,
+                ConsentGiven = true,
+                RegistrationDate = DateTime.Now
             };
+
+            await _registrationService.AddAsync(registration);
+
+            await DisplayAlert("Success", "Registration submitted!", "OK");
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
