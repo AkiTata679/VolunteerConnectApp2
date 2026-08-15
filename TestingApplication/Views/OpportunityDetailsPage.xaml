@@ -8,30 +8,37 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
+            <!-- Image -->
             <Image x:Name="OpportunityImage"
                    HeightRequest="200"
                    Aspect="AspectFill" />
 
+            <!-- Title -->
             <Label x:Name="TitleLabel"
                    FontSize="26"
                    FontAttributes="Bold" />
 
+            <!-- Category -->
             <Label x:Name="CategoryLabel"
                    FontSize="18"
                    TextColor="Gray" />
 
+            <!-- Date -->
             <Label x:Name="DateLabel"
                    FontSize="16"
                    TextColor="Gray" />
 
+            <!-- Time -->
             <Label x:Name="TimeLabel"
                    FontSize="16"
                    TextColor="Gray" />
 
+            <!-- Location -->
             <Label x:Name="LocationLabel"
                    FontSize="16"
                    TextColor="Gray" />
 
+            <!-- Description -->
             <Label Text="Description"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -40,6 +47,7 @@
             <Label x:Name="DescriptionLabel"
                    FontSize="16" />
 
+            <!-- Requirements -->
             <Label Text="Requirements"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -48,6 +56,13 @@
             <Label x:Name="RequirementsLabel"
                    FontSize="16" />
 
+            <!-- Available Places -->
+            <Label x:Name="PlacesLabel"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Purple" />
+
+            <!-- Register Button -->
             <Button Text="Register Interest"
                     x:Name="RegisterButton"
                     BackgroundColor="#0078D4"

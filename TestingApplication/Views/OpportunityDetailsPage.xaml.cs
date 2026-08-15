@@ -44,16 +44,17 @@ namespace VolunteerConnect2.Views
             LocationLabel.Text = $"Location: {opportunity.Location}";
             DescriptionLabel.Text = opportunity.Description;
             RequirementsLabel.Text = opportunity.Requirements;
+            PlacesLabel.Text = $"Available Places: {opportunity.AvailablePlaces}";
 
             RegisterButton.Clicked += async (s, e) =>
             {
-                await Shell.Current.GoToAsync($"//RegistrationPage?opportunityId={opportunity.Id}");
+                await Shell.Current.GoToAsync($"RegistrationPage?opportunityId={opportunity.Id}");
             };
         }
 
         public static async Task NavigateToDetails(int opportunityId)
         {
-            await Shell.Current.GoToAsync($"//OpportunityDetailsPage?opportunityId={opportunityId}");
+            await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={opportunityId}");
         }
     }
 }
