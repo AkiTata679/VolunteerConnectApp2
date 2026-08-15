@@ -3,96 +3,65 @@ using VolunteerConnect2.Services;
 
 namespace VolunteerConnect2.Views
 {
-    public partial class MyRegistrationPage : ContentPage
+    public partial class MyRegistrationsPage : ContentPage
     {
         private RegistrationService _registrationService = new RegistrationService();
         private OpportunityService _opportunityService = new OpportunityService();
 
-        private List<RegistrationDisplayModel> _displayList = new();
-
-        public MyRegistrationPage()
+        public MyRegistrationsPage()
         {
             InitializeComponent();
+            LoadRegistrations();
         }
 
-        protected override async void OnAppearing()
+        private async void LoadRegistrations()
         {
-            base.OnAppearing();
-
             if (!DatabaseService.IsInitialized)
                 await DatabaseService.InitializeAsync();
 
-            await LoadRegistrations();
-            SetupSelection();
+            var items = await _registrationService.GetAll();
+            RegistrationsCollection.ItemsSource = items;
         }
 
-        private async Task LoadRegistrations()
+        private async void ViewDetailsClicked(object sender, EventArgs e)
         {
-            var registrations = await _registrationService.GetAllAsync();
-            var opportunities = await _opportunityService.GetAllAsync();
+            int id = (int)((Button)sender).CommandParameter;
 
-            _displayList = registrations.Select(reg =>
+            var registration = await _registrationService.GetById(id);
+            if (registration == null)
             {
-                var opp = opportunities.FirstOrDefault(o => o.Id == reg.OpportunityId);
+                await DisplayAlert("Error", "Registration not found.", "OK");
+                return;
+            }
 
-                return new RegistrationDisplayModel
-                {
-                    Id = reg.Id,
-                    OpportunityId = reg.OpportunityId,
-                    OpportunityTitle = opp?.Title ?? "Unknown Opportunity",
-                    ContactDetail = reg.ContactDetail,
-                    RegistrationDate = reg.RegistrationDate
-                };
-            }).ToList();
-
-            RegistrationsList.ItemsSource = _displayList;
+            await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={registration.OpportunityId}");
         }
 
-        private void SetupSelection()
+        private async void EditClicked(object sender, EventArgs e)
         {
-            RegistrationsList.SelectionChanged += async (s, e) =>
-            {
-                if (e.CurrentSelection.FirstOrDefault() is RegistrationDisplayModel selected)
-                {
-                    string action = await DisplayActionSheet(
-                        "Registration Options",
-                        "Cancel",
-                        null,
-                        "View / Edit",
-                        "Delete");
+            int id = (int)((Button)sender).CommandParameter;
 
-                    if (action == "View / Edit")
-                    {
-                        await Shell.Current.GoToAsync(
-                            $"//EditRegistrationPage?registrationId={selected.Id}");
-                    }
-                    else if (action == "Delete")
-                    {
-                        bool confirm = await DisplayAlert(
-                            "Confirm Deletion",
-                            "Are you sure you want to delete this registration?",
-                            "Yes",
-                            "No");
-
-                        if (confirm)
-                        {
-                            await _registrationService.DeleteAsync(selected.Id);
-                            await LoadRegistrations();
-                        }
-                    }
-
-                    RegistrationsList.SelectedItem = null;
-                }
-            };
+            await Shell.Current.GoToAsync($"EditRegistrationPage?registrationId={id}");
         }
-    }
 
-    public class RegistrationDisplayModel
-    {
-        public int Id { get; set; }
-        public int OpportunityId { get; set; }
-        public string OpportunityTitle { get; set; }
-        public string ContactDetail { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        private async void DeleteClicked(object sender, EventArgs e)
+        {
+            int id = (int)((Button)sender).CommandParameter;
+
+            bool confirm = await DisplayAlert(
+                "Confirm Delete",
+                "Are you sure you want to delete this registration?",
+                "Delete",
+                "Cancel");
+
+            if (!confirm)
+                return;
+
+            await _registrationService.Delete(id);
+
+            await DisplayAlert("Deleted", "Registration removed.", "OK");
+
+            LoadRegistrations(); // Refresh list
+        }
     }
 }

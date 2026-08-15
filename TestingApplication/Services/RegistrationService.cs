@@ -35,5 +35,23 @@ namespace VolunteerConnect2.Services
             if (reg != null)
                 await _db.DeleteAsync(reg);
         }
+
+        // ⭐ ADDED — wrapper for MyRegistrationsPage
+        public Task<List<VolunteerRegistration>> GetAll()
+        {
+            return GetAllAsync();
+        }
+
+        // ⭐ ADDED — wrapper for MyRegistrationsPage
+        public Task<VolunteerRegistration> GetById(int id)
+        {
+            return GetByIdAsync(id);
+        }
+
+        // ⭐ ADDED — wrapper for MyRegistrationsPage
+        public Task Delete(int id)
+        {
+            return DeleteAsync(id);
+        }
     }
 }

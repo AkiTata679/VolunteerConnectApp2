@@ -2,35 +2,82 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="VolunteerConnect2.Views.MyRegistrationPage"
+    x:Class="VolunteerConnect2.Views.MyRegistrationsPage"
     Title="My Registrations">
 
-    <VerticalStackLayout Padding="15" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-        <CollectionView x:Name="RegistrationsList"
-                        SelectionMode="Single">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
-                        <VerticalStackLayout Spacing="5">
+            <CollectionView x:Name="RegistrationsCollection"
+                            SelectionMode="None">
 
-                            <Label Text="{Binding OpportunityTitle}"
-                                   FontSize="18"
-                                   FontAttributes="Bold" />
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="15"
+                               Margin="0,10"
+                               BorderColor="LightGray"
+                               CornerRadius="12"
+                               HasShadow="True">
 
-                            <Label Text="{Binding RegistrationDate, StringFormat='Registered: {0:dd MMM yyyy}'}"
-                                   FontSize="14"
-                                   TextColor="Gray" />
+                            <VerticalStackLayout Spacing="10">
 
-                            <Label Text="{Binding ContactDetail}"
-                                   FontSize="14"
-                                   TextColor="Gray" />
+                                <!-- Preferred Name -->
+                                <Label Text="{Binding PreferredName}"
+                                       FontSize="20"
+                                       FontAttributes="Bold" />
 
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <!-- Contact -->
+                                <Label Text="{Binding ContactDetail}"
+                                       FontSize="16"
+                                       TextColor="Gray" />
 
-    </VerticalStackLayout>
+                                <!-- Availability -->
+                                <Label Text="{Binding Availability}"
+                                       FontSize="16"
+                                       TextColor="Gray" />
+
+                                <!-- Notes -->
+                                <Label Text="{Binding Notes}"
+                                       FontSize="16"
+                                       TextColor="Gray" />
+
+                                <!-- Buttons -->
+                                <HorizontalStackLayout Spacing="10">
+
+                                    <!-- View Details -->
+                                    <Button Text="View Details"
+                                            BackgroundColor="#0078D4"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            CommandParameter="{Binding Id}"
+                                            Clicked="ViewDetailsClicked" />
+
+                                    <!-- Edit -->
+                                    <Button Text="Edit"
+                                            BackgroundColor="#7A3EF0"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            CommandParameter="{Binding Id}"
+                                            Clicked="EditClicked" />
+
+                                    <!-- Delete -->
+                                    <Button Text="Delete"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            CommandParameter="{Binding Id}"
+                                            Clicked="DeleteClicked" />
+
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
