@@ -3,41 +3,77 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="VolunteerConnect2.Views.PrivacyPage"
-    Title="Privacy Information">
+    Title="Privacy &amp; Data Protection">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Label Text="Privacy Information"
+            <Label Text="Privacy &amp; Data Protection"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <Label Text="Your privacy is important. This app stores your registration details locally on your device. No information is shared externally or uploaded anywhere."
-                   FontSize="16"
-                   TextColor="Gray"
-                   LineBreakMode="WordWrap" />
-
-            <Label Text="Information Stored"
+            <Label Text="What Information Is Collected"
                    FontSize="20"
-                   FontAttributes="Bold"
-                   Margin="0,10,0,0" />
+                   FontAttributes="Bold" />
 
-            <Label Text="• Preferred name\n• Contact details\n• Availability\n• Notes (optional)\n• Consent confirmation\n• Registration date"
-                   FontSize="16"
-                   LineBreakMode="WordWrap" />
+            <Label Text="• Preferred name
+• Contact details (email or phone)
+• Availability
+• Optional notes
+• The opportunity you register for"
+                   FontSize="16" />
 
-            <Label Text="You may delete your registrations at any time from the My Registrations page."
-                   FontSize="16"
-                   TextColor="Gray"
-                   LineBreakMode="WordWrap" />
+            <Label Text="Why This Information Is Collected"
+                   FontSize="20"
+                   FontAttributes="Bold" />
 
-            <Button Text="Clear My Messages"
-                    x:Name="ClearMessagesButton"
-                    BackgroundColor="#888"
-                    TextColor="White"
-                    FontSize="18"
-                    CornerRadius="10" />
+            <Label Text="Your information is collected so the app can create your volunteer registration, display it back to you, and allow you to manage or update your involvement in different opportunities."
+                   FontSize="16" />
+
+            <Label Text="How Your Information Is Used"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="Your information is used only within the app to show your registrations, allow you to edit or delete them, and help track available places for each opportunity."
+                   FontSize="16" />
+
+            <Label Text="Where Your Information Is Stored"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="All information is stored securely on your device using a local SQLite database. Nothing is uploaded to external servers or shared online."
+                   FontSize="16" />
+
+            <Label Text="How You Can Correct Your Information"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="You can correct your details at any time by opening the My Registrations page and selecting the Edit option for the registration you want to update."
+                   FontSize="16" />
+
+            <Label Text="How You Can Delete Your Information"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="You can delete any registration by selecting the Delete button on the My Registrations page. This permanently removes the information from your device."
+                   FontSize="16" />
+
+            <Label Text="Local Data Storage"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="This prototype stores all data locally on your device. No information is transmitted, shared, or stored externally. Uninstalling the app permanently deletes all stored data."
+                   FontSize="16" />
+
+            <Label Text="Additional Notes"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <Label Text="• No tracking or analytics are used.
+• No third-party services receive your data.
+• The app does not collect location or background activity."
+                   FontSize="16" />
 
         </VerticalStackLayout>
     </ScrollView>
