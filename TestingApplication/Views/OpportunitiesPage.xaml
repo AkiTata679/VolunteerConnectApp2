@@ -7,52 +7,85 @@
 
     <VerticalStackLayout Padding="15" Spacing="15">
 
+        <!-- Search by title -->
         <SearchBar x:Name="SearchBar"
                    Placeholder="Search by title..."
                    FontSize="16" />
-
-        <Picker x:Name="CategoryPicker"
-                Title="Filter by category"
-                FontSize="16" />
-
-        <HorizontalStackLayout Spacing="10">
-            <Label Text="Available Only" VerticalOptions="Center" />
-            <Switch x:Name="AvailabilitySwitch" />
-        </HorizontalStackLayout>
 
         <CollectionView x:Name="OpportunitiesList"
                         SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
-                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto, Auto">
+                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
 
+                            <!-- Image -->
                             <Image Grid.RowSpan="3"
                                    Grid.Column="0"
                                    Source="{Binding ImageName}"
                                    HeightRequest="100"
                                    Aspect="AspectFill" />
 
+                            <!-- Title -->
                             <Label Grid.Column="1"
                                    Text="{Binding Title}"
                                    FontSize="18"
                                    FontAttributes="Bold" />
 
+                            <!-- Category -->
                             <Label Grid.Column="1"
                                    Grid.Row="1"
                                    Text="{Binding Category}"
                                    FontSize="14"
                                    TextColor="Gray" />
 
+                            <!-- Date -->
                             <Label Grid.Column="1"
                                    Grid.Row="2"
                                    Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
                                    FontSize="14"
                                    TextColor="Gray" />
 
+                            <!-- Time -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="3"
+                                   Text="{Binding Time}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+
+                            <!-- Location -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="4"
+                                   Text="{Binding Location}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+
+                            <!-- Short Description -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="5"
+                                   Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+
+                            <!-- Availability Status -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="6"
+                                   Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabilityConverter}}"
+                                   FontSize="14"
+                                   TextColor="Purple"
+                                   FontAttributes="Bold" />
+
+                            <!-- Available Places -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="7"
+                                   Text="{Binding AvailablePlaces, StringFormat='Available Places: {0}'}"
+                                   FontSize="14"
+                                   TextColor="Purple"
+                                   FontAttributes="Bold" />
+
                             <!-- View Details button -->
                             <Button Grid.Column="1"
-                                    Grid.Row="3"
+                                    Grid.Row="8"
                                     Text="View Details"
                                     BackgroundColor="#7A3EF0"
                                     TextColor="White"
