@@ -3,15 +3,21 @@ using VolunteerConnect2.Services;
 
 namespace VolunteerConnect2.Views
 {
-    public partial class MyRegistrationsPage : ContentPage
+    public partial class MyRegistrationPage : ContentPage
     {
         private RegistrationService _registrationService = new RegistrationService();
         private OpportunityService _opportunityService = new OpportunityService();
 
-        public MyRegistrationsPage()
+        public MyRegistrationPage()
         {
             InitializeComponent();
             LoadRegistrations();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadRegistrations();   // Refresh list every time page appears
         }
 
         private async void LoadRegistrations()

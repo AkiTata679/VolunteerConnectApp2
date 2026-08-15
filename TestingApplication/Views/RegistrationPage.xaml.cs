@@ -49,7 +49,6 @@ namespace VolunteerConnect2.Views
             string availability = AvailabilityEntry.Text?.Trim();
             string notes = NotesEditor.Text?.Trim();
 
-            // Required fields
             if (string.IsNullOrWhiteSpace(preferredName) ||
                 string.IsNullOrWhiteSpace(contact) ||
                 string.IsNullOrWhiteSpace(availability))
@@ -60,7 +59,6 @@ namespace VolunteerConnect2.Views
                 return;
             }
 
-            // Contact validation
             bool validEmail = contact.Contains("@") && contact.Contains(".");
             bool validPhone = contact.All(char.IsDigit) && contact.Length >= 7;
 
@@ -72,7 +70,6 @@ namespace VolunteerConnect2.Views
                 return;
             }
 
-            // Privacy consent
             if (!PrivacyConsentCheckBox.IsChecked)
             {
                 await DisplayAlert("Consent Required",
@@ -81,7 +78,6 @@ namespace VolunteerConnect2.Views
                 return;
             }
 
-            // Save registration
             var registration = new VolunteerRegistration
             {
                 OpportunityId = _opportunity.Id,

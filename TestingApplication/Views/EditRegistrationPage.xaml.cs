@@ -17,6 +17,7 @@ namespace VolunteerConnect2.Views
         public EditRegistrationPage()
         {
             InitializeComponent();
+            SetupSaveButton();
         }
 
         protected override async void OnAppearing()
@@ -27,7 +28,6 @@ namespace VolunteerConnect2.Views
                 await DatabaseService.InitializeAsync();
 
             await LoadRegistration();
-            SetupSaveButton();
         }
 
         private async Task LoadRegistration()
@@ -56,6 +56,12 @@ namespace VolunteerConnect2.Views
         {
             SaveButton.Clicked += async (s, e) =>
             {
+                if (_registration == null)
+                {
+                    await DisplayAlert("Error", "Registration not loaded.", "OK");
+                    return;
+                }
+
                 if (string.IsNullOrWhiteSpace(NameEntry.Text))
                 {
                     await DisplayAlert("Missing Information", "Please enter your preferred name.", "OK");
@@ -83,7 +89,7 @@ namespace VolunteerConnect2.Views
                 await _registrationService.UpdateAsync(_registration);
 
                 await DisplayAlert("Success", "Your registration has been updated.", "OK");
-                await Shell.Current.GoToAsync("//MyRegistrationPage");
+                await Shell.Current.GoToAsync("..");
             };
         }
     }

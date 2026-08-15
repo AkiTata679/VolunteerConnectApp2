@@ -8,9 +8,10 @@ namespace VolunteerConnect2
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("OpportunityDetailsPage", typeof(OpportunityDetailsPage));
-            Routing.RegisterRoute("RegistrationPage", typeof(RegistrationPage));
-            Routing.RegisterRoute("EditRegistrationPage", typeof(EditRegistrationPage));
+            // Required route registrations
+            Routing.RegisterRoute(nameof(OpportunityDetailsPage), typeof(OpportunityDetailsPage));
+            Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
+            Routing.RegisterRoute(nameof(EditRegistrationPage), typeof(EditRegistrationPage));
         }
     }
 }
