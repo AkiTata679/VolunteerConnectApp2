@@ -1,4 +1,4 @@
-using VolunteerConnect2.Models;
+﻿using VolunteerConnect2.Models;
 using VolunteerConnect2.Services;
 
 namespace VolunteerConnect2.Views
@@ -49,6 +49,11 @@ namespace VolunteerConnect2.Views
             {
                 await Shell.Current.GoToAsync($"//RegistrationPage?opportunityId={opportunity.Id}");
             };
+        }
+
+        public static async Task NavigateToDetails(int opportunityId)
+        {
+            await Shell.Current.GoToAsync($"//OpportunityDetailsPage?opportunityId={opportunityId}");
         }
     }
 }

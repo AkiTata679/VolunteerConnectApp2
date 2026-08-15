@@ -1,7 +1,8 @@
 ﻿using Android.App;
 using Android.Runtime;
+using VolunteerConnect2;
 
-namespace TestingApplication
+namespace VolunteerConnect2
 {
     [Application]
     public class MainApplication : MauiApplication

@@ -5,7 +5,7 @@
     x:Class="VolunteerConnect2.App">
 
     <Application.Resources>
-        <!-- Global styles or colors -->
+        <!-- Global styles or colors can be added here if needed -->
     </Application.Resources>
 
 </Application>

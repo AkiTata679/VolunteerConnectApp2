@@ -45,7 +45,6 @@ namespace VolunteerConnect2.Views
         {
             SubmitButton.Clicked += async (s, e) =>
             {
-                // Validation
                 if (string.IsNullOrWhiteSpace(NameEntry.Text))
                 {
                     await DisplayAlert("Missing Information", "Please enter your preferred name.", "OK");
@@ -64,7 +63,6 @@ namespace VolunteerConnect2.Views
                     return;
                 }
 
-                // Create registration
                 var registration = new VolunteerRegistration
                 {
                     OpportunityId = OpportunityId,

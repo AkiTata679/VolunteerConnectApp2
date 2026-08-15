@@ -1,4 +1,4 @@
-using VolunteerConnect2.Models;
+﻿using VolunteerConnect2.Models;
 using VolunteerConnect2.Services;
 
 namespace VolunteerConnect2.Views
@@ -48,7 +48,7 @@ namespace VolunteerConnect2.Views
             {
                 if (e.CurrentSelection.FirstOrDefault() is VolunteerOpportunity selected)
                 {
-                    await Shell.Current.GoToAsync($"//OpportunityDetailsPage?opportunityId={selected.Id}");
+                    await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={selected.Id}");
                     OpportunitiesList.SelectedItem = null;
                 }
             };
@@ -58,27 +58,34 @@ namespace VolunteerConnect2.Views
         {
             IEnumerable<VolunteerOpportunity> filtered = _allOpportunities;
 
-            // Search filter
             if (!string.IsNullOrWhiteSpace(SearchBar.Text))
             {
                 string query = SearchBar.Text.ToLower();
                 filtered = filtered.Where(o => o.Title.ToLower().Contains(query));
             }
 
-            // Category filter
             if (CategoryPicker.SelectedIndex > 0)
             {
                 string category = CategoryPicker.SelectedItem.ToString();
                 filtered = filtered.Where(o => o.Category == category);
             }
 
-            // Availability filter
             if (AvailabilitySwitch.IsToggled)
             {
                 filtered = filtered.Where(o => o.IsAvailable);
             }
 
             OpportunitiesList.ItemsSource = filtered.ToList();
+        }
+
+        // View Details button 
+        private async void ViewDetailsClicked(object sender, EventArgs e)
+        {
+            var opportunity = (sender as Button)?.BindingContext as VolunteerOpportunity;
+            if (opportunity != null)
+            {
+                await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={opportunity.Id}");
+            }
         }
     }
 }

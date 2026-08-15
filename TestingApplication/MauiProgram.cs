@@ -13,7 +13,7 @@ namespace VolunteerConnect2
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
-
+                    // Add custom fonts here if needed
                 });
 
             return builder.Build();

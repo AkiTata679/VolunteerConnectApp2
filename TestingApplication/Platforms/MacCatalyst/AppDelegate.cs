@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace TestingApplication
+namespace VolunteerConnect2
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

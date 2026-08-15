@@ -10,8 +10,7 @@
 
             <Image x:Name="OpportunityImage"
                    HeightRequest="200"
-                   Aspect="AspectFill"
-                   StrokeShape="RoundRectangle 12" />
+                   Aspect="AspectFill" />
 
             <Label x:Name="TitleLabel"
                    FontSize="26"

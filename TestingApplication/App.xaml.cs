@@ -8,10 +8,8 @@ namespace VolunteerConnect2
         {
             InitializeComponent();
 
-            // Set the Shell as the root of the app
             MainPage = new AppShell();
 
-            // Start database initialization in the background
             Task.Run(async () =>
             {
                 try
@@ -20,7 +18,6 @@ namespace VolunteerConnect2
                 }
                 catch (Exception ex)
                 {
-                    // log or handle initialization errors
                     System.Diagnostics.Debug.WriteLine($"DB Init Error: {ex.Message}");
                 }
             });

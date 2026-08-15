@@ -1,53 +1,58 @@
-using VolunteerConnect2.Services;
 using VolunteerConnect2.Models;
+using VolunteerConnect2.Services;
 
 namespace VolunteerConnect2.Views
 {
     public partial class HomePage : ContentPage
     {
         private OpportunityService _opportunityService = new OpportunityService();
+        private List<VolunteerOpportunity> _allOpportunities = new();
 
         public HomePage()
         {
             InitializeComponent();
-            LoadFeaturedOpportunity();
-            SetupNavigation();
+            LoadHomePageData();
         }
 
-        private async void LoadFeaturedOpportunity()
+        private async void LoadHomePageData()
         {
-            // Wait for DB initialization if needed
             if (!DatabaseService.IsInitialized)
                 await DatabaseService.InitializeAsync();
 
-            var opportunities = await _opportunityService.GetAllAsync();
-            if (opportunities.Count == 0)
-                return;
+            _allOpportunities = await _opportunityService.GetAllAsync();
 
-            var featured = opportunities.First();
+            // Total opportunities
+            TotalOpportunitiesLabel.Text = $"Total Opportunities: {_allOpportunities.Count}";
 
-            FeaturedImage.Source = featured.ImageName;
-            FeaturedTitle.Text = featured.Title;
-            FeaturedCategory.Text = featured.Category;
-            FeaturedDate.Text = featured.Date.ToString("dd MMM yyyy");
+            // Featured opportunity
+            var featured = _allOpportunities.FirstOrDefault();
+            if (featured != null)
+            {
+                FeaturedImage.Source = featured.ImageName;
+                FeaturedTitle.Text = featured.Title;
+                FeaturedLocation.Text = $"Location: {featured.Location}";
+                FeaturedPlaces.Text = $"Available Places: {featured.AvailablePlaces}";
+                FeaturedButton.BindingContext = featured;
+            }
         }
 
-        private void SetupNavigation()
+        private async void FeaturedButton_Clicked(object sender, EventArgs e)
         {
-            BrowseButton.Clicked += async (s, e) =>
+            var opportunity = (sender as Button)?.BindingContext as VolunteerOpportunity;
+            if (opportunity != null)
             {
-                await Shell.Current.GoToAsync("//OpportunitiesPage");
-            };
+                await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={opportunity.Id}");
+            }
+        }
 
-            RegistrationsButton.Clicked += async (s, e) =>
-            {
-                await Shell.Current.GoToAsync("//MyRegistrationPage");
-            };
+        private async void BrowseOpportunities_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("OpportunitiesPage");
+        }
 
-            PrivacyButton.Clicked += async (s, e) =>
-            {
-                await Shell.Current.GoToAsync("//PrivacyPage");
-            };
+        private async void MyRegistrations_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("MyRegistrationPage");
         }
     }
 }

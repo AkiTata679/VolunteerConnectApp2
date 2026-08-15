@@ -3,68 +3,78 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="VolunteerConnect2.Views.HomePage"
-    Title="VolunteerConnect">
+    Title="Home">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
 
+            <!-- App Name -->
             <Label Text="VolunteerConnect"
                    FontSize="32"
-                   HorizontalOptions="Center"
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
 
-            <Label Text="Discover local volunteer opportunities and manage your registrations."
-                   FontSize="16"
+            <!-- Short Explanation -->
+            <Label Text="Discover meaningful volunteer opportunities and make a positive impact in your community."
+                   FontSize="18"
+                   TextColor="Gray"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center" />
 
             <!-- Featured Opportunity -->
             <Frame BorderColor="#cccccc" CornerRadius="12" Padding="15">
                 <VerticalStackLayout Spacing="10">
+
                     <Label Text="Featured Opportunity"
-                           FontSize="20"
+                           FontSize="22"
                            FontAttributes="Bold" />
 
                     <Image x:Name="FeaturedImage"
-                           HeightRequest="160"
-                           Aspect="AspectFill"
-                           StrokeShape="RoundRectangle 12" />
+                           HeightRequest="180"
+                           Aspect="AspectFill" />
 
                     <Label x:Name="FeaturedTitle"
-                           FontSize="18"
+                           FontSize="20"
                            FontAttributes="Bold" />
 
-                    <Label x:Name="FeaturedCategory"
-                           FontSize="14"
+                    <Label x:Name="FeaturedLocation"
+                           FontSize="16"
                            TextColor="Gray" />
 
-                    <Label x:Name="FeaturedDate"
-                           FontSize="14"
+                    <Label x:Name="FeaturedPlaces"
+                           FontSize="16"
                            TextColor="Gray" />
+
+                    <Button Text="View Details"
+                            x:Name="FeaturedButton"
+                            BackgroundColor="#7A3EF0"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="FeaturedButton_Clicked" />
+
                 </VerticalStackLayout>
             </Frame>
 
+            <!-- Total Opportunities -->
+            <Label x:Name="TotalOpportunitiesLabel"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
             <!-- Navigation Buttons -->
             <Button Text="Browse Opportunities"
-                    x:Name="BrowseButton"
-                    FontSize="18"
                     BackgroundColor="#0078D4"
                     TextColor="White"
-                    CornerRadius="10" />
+                    FontSize="18"
+                    CornerRadius="10"
+                    Clicked="BrowseOpportunities_Clicked" />
 
             <Button Text="My Registrations"
-                    x:Name="RegistrationsButton"
-                    FontSize="18"
-                    BackgroundColor="#444"
+                    BackgroundColor="#0078D4"
                     TextColor="White"
-                    CornerRadius="10" />
-
-            <Button Text="Privacy Information"
-                    x:Name="PrivacyButton"
                     FontSize="18"
-                    BackgroundColor="#888"
-                    TextColor="White"
-                    CornerRadius="10" />
+                    CornerRadius="10"
+                    Clicked="MyRegistrations_Clicked" />
 
         </VerticalStackLayout>
     </ScrollView>

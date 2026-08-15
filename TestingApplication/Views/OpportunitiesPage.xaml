@@ -7,36 +7,31 @@
 
     <VerticalStackLayout Padding="15" Spacing="15">
 
-        <!-- Search -->
         <SearchBar x:Name="SearchBar"
                    Placeholder="Search by title..."
                    FontSize="16" />
 
-        <!-- Category Filter -->
         <Picker x:Name="CategoryPicker"
                 Title="Filter by category"
                 FontSize="16" />
 
-        <!-- Availability Filter -->
         <HorizontalStackLayout Spacing="10">
             <Label Text="Available Only" VerticalOptions="Center" />
             <Switch x:Name="AvailabilitySwitch" />
         </HorizontalStackLayout>
 
-        <!-- Opportunities List -->
         <CollectionView x:Name="OpportunitiesList"
                         SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
-                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto">
+                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto, Auto">
 
                             <Image Grid.RowSpan="3"
                                    Grid.Column="0"
                                    Source="{Binding ImageName}"
                                    HeightRequest="100"
-                                   Aspect="AspectFill"
-                                   StrokeShape="RoundRectangle 10" />
+                                   Aspect="AspectFill" />
 
                             <Label Grid.Column="1"
                                    Text="{Binding Title}"
@@ -54,6 +49,16 @@
                                    Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
                                    FontSize="14"
                                    TextColor="Gray" />
+
+                            <!-- View Details button -->
+                            <Button Grid.Column="1"
+                                    Grid.Row="3"
+                                    Text="View Details"
+                                    BackgroundColor="#7A3EF0"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    BindingContext="{Binding}"
+                                    Clicked="ViewDetailsClicked" />
 
                         </Grid>
                     </Frame>

@@ -87,7 +87,6 @@ namespace VolunteerConnect2.Views
         }
     }
 
-    // Helper model for display
     public class RegistrationDisplayModel
     {
         public int Id { get; set; }

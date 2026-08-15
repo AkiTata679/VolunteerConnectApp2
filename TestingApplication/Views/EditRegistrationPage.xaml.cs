@@ -56,7 +56,6 @@ namespace VolunteerConnect2.Views
         {
             SaveButton.Clicked += async (s, e) =>
             {
-                // Validation
                 if (string.IsNullOrWhiteSpace(NameEntry.Text))
                 {
                     await DisplayAlert("Missing Information", "Please enter your preferred name.", "OK");
@@ -75,7 +74,6 @@ namespace VolunteerConnect2.Views
                     return;
                 }
 
-                // Update registration
                 _registration.PreferredName = NameEntry.Text.Trim();
                 _registration.ContactDetail = ContactEntry.Text.Trim();
                 _registration.Availability = AvailabilityEntry.Text?.Trim();

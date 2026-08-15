@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:VolunteerConnect2.Views"
     x:Class="VolunteerConnect2.AppShell">
 
-    <!-- Home Page -->
+    <!-- Home Page (Startup) -->
     <ShellContent
         Title="Home"
         Route="HomePage"

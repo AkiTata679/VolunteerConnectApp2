@@ -31,10 +31,12 @@
                     FontSize="16"
                     HeightRequest="120" />
 
-            <CheckBox x:Name="ConsentCheckBox" />
-            <Label Text="I agree to the privacy terms and consent to storing my information."
-                   FontSize="14"
-                   VerticalOptions="Center" />
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="ConsentCheckBox" />
+                <Label Text="I agree to the privacy terms and consent to storing my information."
+                       FontSize="14"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
             <Button Text="Submit Registration"
                     x:Name="SubmitButton"
