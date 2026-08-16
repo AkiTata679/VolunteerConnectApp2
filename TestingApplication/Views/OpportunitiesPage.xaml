@@ -17,7 +17,8 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
-                        <Grid ColumnDefinitions="120, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+                        <Grid ColumnDefinitions="120, *"
+                              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
 
                             <!-- Image -->
                             <Image Grid.RowSpan="3"
@@ -90,7 +91,7 @@
                                     BackgroundColor="#7A3EF0"
                                     TextColor="White"
                                     CornerRadius="10"
-                                    BindingContext="{Binding}"
+                                    CommandParameter="{Binding Id}"
                                     Clicked="ViewDetailsClicked" />
 
                         </Grid>

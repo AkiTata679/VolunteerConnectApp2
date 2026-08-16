@@ -33,7 +33,6 @@ namespace VolunteerConnect2.Views
         {
             IEnumerable<VolunteerOpportunity> filtered = _allOpportunities;
 
-            // Search by title only
             if (!string.IsNullOrWhiteSpace(SearchBar.Text))
             {
                 string query = SearchBar.Text.ToLower();
@@ -45,10 +44,11 @@ namespace VolunteerConnect2.Views
 
         private async void ViewDetailsClicked(object sender, EventArgs e)
         {
-            var opportunity = (sender as Button)?.BindingContext as VolunteerOpportunity;
-            if (opportunity != null)
+            var button = (Button)sender;
+
+            if (button.CommandParameter is int id)
             {
-                await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={opportunity.Id}");
+                await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={id}");
             }
         }
     }

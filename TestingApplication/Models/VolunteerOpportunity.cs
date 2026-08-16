@@ -1,8 +1,12 @@
-﻿namespace VolunteerConnect2.Models
+﻿using SQLite;
+
+namespace VolunteerConnect2.Models
 {
     public class VolunteerOpportunity
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public string Title { get; set; }
         public string Category { get; set; }
         public DateTime Date { get; set; }

@@ -32,7 +32,7 @@ namespace VolunteerConnect2.Views
             if (opportunity == null)
             {
                 await DisplayAlert("Error", "The selected opportunity could not be found.", "OK");
-                await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("///OpportunitiesPage");
                 return;
             }
 
@@ -50,11 +50,6 @@ namespace VolunteerConnect2.Views
             {
                 await Shell.Current.GoToAsync($"RegistrationPage?opportunityId={opportunity.Id}");
             };
-        }
-
-        public static async Task NavigateToDetails(int opportunityId)
-        {
-            await Shell.Current.GoToAsync($"OpportunityDetailsPage?opportunityId={opportunityId}");
         }
     }
 }

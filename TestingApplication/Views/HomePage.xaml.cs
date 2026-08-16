@@ -21,10 +21,8 @@ namespace VolunteerConnect2.Views
 
             _allOpportunities = await _opportunityService.GetAllAsync();
 
-            // Total opportunities
             TotalOpportunitiesLabel.Text = $"Total Opportunities: {_allOpportunities.Count}";
 
-            // Featured opportunity
             var featured = _allOpportunities.FirstOrDefault();
             if (featured != null)
             {
@@ -47,12 +45,12 @@ namespace VolunteerConnect2.Views
 
         private async void BrowseOpportunities_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("OpportunitiesPage");
+            await Shell.Current.GoToAsync("///OpportunitiesPage");
         }
 
         private async void MyRegistrations_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("MyRegistrationPage");
+            await Shell.Current.GoToAsync("///MyRegistrationPage");
         }
     }
 }

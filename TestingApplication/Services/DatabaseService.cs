@@ -21,7 +21,7 @@ namespace VolunteerConnect2.Services
                 if (IsInitialized)
                     return;
 
-                string dbPath = Path.Combine(FileSystem.AppDataDirectory, "volunteerconnect.db");
+                string dbPath = Path.Combine(FileSystem.AppDataDirectory, "volunteerconnect2.db");
                 _connection = new SQLiteAsyncConnection(dbPath);
 
                 await _connection.CreateTableAsync<VolunteerOpportunity>();
