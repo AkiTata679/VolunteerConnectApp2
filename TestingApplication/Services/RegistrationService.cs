@@ -14,6 +14,9 @@ namespace VolunteerConnect2.Services
 
         public async Task<VolunteerRegistration> GetByIdAsync(int id)
         {
+            if (id <= 0)
+                return null;
+
             return await _db.Table<VolunteerRegistration>()
                 .Where(r => r.Id == id)
                 .FirstOrDefaultAsync();
@@ -24,34 +27,30 @@ namespace VolunteerConnect2.Services
             await _db.InsertAsync(registration);
         }
 
-        public async Task UpdateAsync(VolunteerRegistration registration)
+        public async Task<bool> UpdateAsync(VolunteerRegistration registration)
         {
-            await _db.UpdateAsync(registration);
+            if (registration == null || registration.Id <= 0)
+                return false;
+
+            int rows = await _db.UpdateAsync(registration);
+            return rows > 0;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
+            if (id <= 0)
+                return false;
+
             var reg = await GetByIdAsync(id);
-            if (reg != null)
-                await _db.DeleteAsync(reg);
+            if (reg == null)
+                return false;
+
+            int rows = await _db.DeleteAsync(reg);
+            return rows > 0;
         }
 
-        // ⭐ ADDED — wrapper for MyRegistrationsPage
-        public Task<List<VolunteerRegistration>> GetAll()
-        {
-            return GetAllAsync();
-        }
-
-        // ⭐ ADDED — wrapper for MyRegistrationsPage
-        public Task<VolunteerRegistration> GetById(int id)
-        {
-            return GetByIdAsync(id);
-        }
-
-        // ⭐ ADDED — wrapper for MyRegistrationsPage
-        public Task Delete(int id)
-        {
-            return DeleteAsync(id);
-        }
+        public Task<List<VolunteerRegistration>> GetAll() => GetAllAsync();
+        public Task<VolunteerRegistration> GetById(int id) => GetByIdAsync(id);
+        public Task<bool> Delete(int id) => DeleteAsync(id);
     }
 }

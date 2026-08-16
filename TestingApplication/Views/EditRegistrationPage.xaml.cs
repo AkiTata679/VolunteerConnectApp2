@@ -86,7 +86,13 @@ namespace VolunteerConnect2.Views
                 _registration.Notes = NotesEditor.Text?.Trim();
                 _registration.ConsentGiven = ConsentCheckBox.IsChecked;
 
-                await _registrationService.UpdateAsync(_registration);
+                var success = await _registrationService.UpdateAsync(_registration);
+
+                if (!success)
+                {
+                    await DisplayAlert("Error", "Failed to update registration.", "OK");
+                    return;
+                }
 
                 await DisplayAlert("Success", "Your registration has been updated.", "OK");
                 await Shell.Current.GoToAsync("..");
