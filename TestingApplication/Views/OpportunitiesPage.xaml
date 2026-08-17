@@ -5,15 +5,21 @@
     x:Class="VolunteerConnect2.Views.OpportunitiesPage"
     Title="Opportunities">
 
-    <VerticalStackLayout Padding="15" Spacing="15">
+    <!-- FIX: Use Grid instead of VerticalStackLayout -->
+    <Grid Padding="15" RowDefinitions="Auto,*">
 
-        <!-- Search by title -->
+        <!-- Search Bar -->
         <SearchBar x:Name="SearchBar"
                    Placeholder="Search by title..."
-                   FontSize="16" />
+                   FontSize="16"
+                   Grid.Row="0" />
 
+        <!-- Scrollable CollectionView -->
         <CollectionView x:Name="OpportunitiesList"
+                        Grid.Row="1"
+                        ItemsLayout="VerticalList"
                         SelectionMode="Single">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
@@ -98,7 +104,8 @@
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
         </CollectionView>
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
